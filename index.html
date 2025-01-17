@@ -3,191 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع توصيات أفلام</title>
+    <title>توصية الأفلام</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e9ecef;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            direction: rtl;
-        }
-
-        header {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            border-bottom: 5px solid #ecf0f1;
+            padding: 20px;
+            color: #fff;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #2e3b4e, #1c1f26);
+            animation: fadeIn 2s ease-in;
         }
-
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         h1 {
-            margin: 0;
             font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-
-        .container {
-            width: 85%;
-            margin: 40px auto;
-        }
-
-        .movie-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-around;
-        }
-
-        .movie {
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            width: 30%;
-        }
-
-        .movie img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .movie-info {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .movie-info h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .movie-info p {
-            font-size: 1.2em;
-            color: #7f8c8d;
-        }
-
-        .movie:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .movie:hover img {
-            transform: scale(1.1);
-        }
-
-        footer {
-            background-color: #2c3e50;
-            color: #fff;
-            text-align: center;
+        .recommendation {
+            margin-top: 20px;
             padding: 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 5px solid #ecf0f1;
+            border: 2px solid #fff;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: none;
+            font-size: 18px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
-
-        .form-container {
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        .form-container input, .form-container button {
-            padding: 12px;
-            margin: 10px;
+        select, input[type="color"] {
+            padding: 10px;
             font-size: 16px;
-            width: 45%;
             border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .form-container button {
-            background-color: #2c3e50;
-            color: white;
             border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+        select:hover, input[type="color"]:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
             cursor: pointer;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background-color 0.3s;
         }
-
-        .form-container button:hover {
-            background-color: #34495e;
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
         }
-
-        /* Responsive design for mobile */
-        @media (max-width: 768px) {
-            .movie {
-                width: 48%;
-            }
+        button:active {
+            transform: scale(0.95);
         }
-
-        @media (max-width: 480px) {
-            .movie {
-                width: 100%;
-            }
-
-            .form-container input, .form-container button {
-                width: 90%;
-            }
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .footer a {
+            color: #1abc9c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: #16a085;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>موقع توصيات أفلام</h1>
-    </header>
-
-    <div class="container">
-        <section>
-            <h2>أفلام مميزة</h2>
-            <div class="movie-list" id="movie-list"></div>
-        </section>
-
-        <section class="form-container">
-            <h2>اشترك للحصول على أحدث التوصيات</h2>
-            <form action="#">
-                <input type="email" placeholder="بريدك الإلكتروني" required>
-                <button type="submit">اشترك</button>
-            </form>
-        </section>
+<body id="page-body">
+    <h1>ما هو أفضل فيلم لمشاهدته اليوم؟</h1>
+    <p>اختر نوع السهرة:</p>
+    <select id="occasion">
+        <option value="family">مع العائلة</option>
+        <option value="friends">مع الأصدقاء</option>
+        <option value="romantic">سهرة رومانسية</option>
+        <option value="action">أفلام حركة</option>
+        <option value="comedy">أفلام كوميدية</option>
+        <option value="animation">أفلام رسوم متحركة</option>
+    </select>
+    <br><br>
+    <button onclick="recommendMovie()">اعرض التوصية</button>
+    <br><br>
+    <p>اختر لون الخلفية:</p>
+    <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()">
+    <div id="recommendation" class="recommendation"></div>
+    <div class="footer">
+        © 2025 موقع توصيات الأفلام | <a href="#">سياسة الخصوصية</a> | <a href="#">شروط الاستخدام</a>
     </div>
 
-    <footer>
-        <p>&copy; 2025 موقع توصيات أفلام. جميع الحقوق محفوظة.</p>
-    </footer>
-
     <script>
-        // مفتاح API الخاص بك من TMDb
-        const API_KEY = 'YOUR_API_KEY';  // استبدل هذا بمفتاح API الخاص بك
-        const BASE_URL = 'https://api.themoviedb.org/3';
-        const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+        function recommendMovie() {
+            const occasion = document.getElementById('occasion').value;
+            let movies = '';
 
-        // دالة لتحميل الأفلام من API
-        async function fetchMovies() {
-            const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=ar&page=1`);
-            const data = await response.json();
+            switch (occasion) {
+                case 'family':
+                    movies = '1. Coco (2017) - فيلم عائلي رائع.\n2. Paddington 2 (2017) - مغامرة ممتعة.\n3. Klaus (2019) - رسوم متحركة جميلة.';
+                    break;
+                case 'friends':
+                    movies = '1. Guardians of the Galaxy (2014) - مليء بالمغامرة.\n2. Zombieland (2009) - كوميديا زومبي.\n3. Project X (2012) - سهرة مليئة بالفوضى.';
+                    break;
+                case 'romantic':
+                    movies = '1. The Notebook (2004) - قصة حب مؤثرة.\n2. La La Land (2016) - مزيج من الموسيقى والرومانسية.\n3. To All the Boys I’ve Loved Before (2018) - رومانسية شبابية.';
+                    break;
+                case 'action':
+                    movies = '1. Mad Max: Fury Road (2015) - حركة مستمرة.\n2. John Wick (2014) - إثارة لا تتوقف.\n3. Extraction (2020) - مهمة إنقاذ خطيرة.';
+                    break;
+                case 'comedy':
+                    movies = '1. Superbad (2007) - كوميديا الشباب.\n2. The Grand Budapest Hotel (2014) - فنية ورائعة.\n3. Dolemite Is My Name (2019) - أداء لا يُنسى.';
+                    break;
+                case 'animation':
+                    movies = '1. Spider-Man: Into the Spider-Verse (2018) - رسوم مذهلة.\n2. Toy Story 4 (2019) - مغامرة جديدة.\n3. Soul (2020) - رحلة فلسفية ممتعة.';
+                    break;
+                default:
+                    movies = 'يرجى اختيار نوع السهرة للحصول على توصية.';
+            }
 
-            const movieList = document.getElementById('movie-list');
-            movieList.innerHTML = '';
-
-            // عرض الأفلام في الصفحة
-            data.results.forEach(movie => {
-                const movieElement = document.createElement('div');
-                movieElement.classList.add('movie');
-                movieElement.innerHTML = `
-                    <img src="${IMAGE_BASE_URL}${movie.poster_path}" alt="${movie.title}">
-                    <div class="movie-info">
-                        <h3>${movie.title}</h3>
-                        <p>${movie.release_date ? movie.release_date.split('-')[0] : 'غير متوفر'} - ${movie.genre_ids ? movie.genre_ids.join(', ') : 'غير متوفر'}</p>
-                    </div>
-                `;
-                movieList.appendChild(movieElement);
-            });
+            const recommendationDiv = document.getElementById('recommendation');
+            recommendationDiv.textContent = movies;
+            recommendationDiv.style.display = 'block';
         }
 
-        // تحميل الأفلام عند تحميل الصفحة
-        window.onload = fetchMovies;
+        function changeBackgroundColor() {
+            const color = document.getElementById('bgColorPicker').value;
+            document.getElementById('page-body').style.background = color;
+        }
     </script>
 </body>
 </html>
