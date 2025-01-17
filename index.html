@@ -11,6 +11,7 @@
             padding: 20px;
             color: #fff;
             overflow-x: hidden;
+            background: linear-gradient(to bottom, #2e3b4e, #1c1f26);
             animation: fadeIn 2s ease-in;
         }
         @keyframes fadeIn {
@@ -64,6 +65,19 @@
         button:active {
             transform: scale(0.95);
         }
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .footer a {
+            color: #1abc9c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: #16a085;
+        }
     </style>
 </head>
 <body id="page-body">
@@ -83,6 +97,9 @@
     <p>اختر لون الخلفية:</p>
     <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()">
     <div id="recommendation" class="recommendation"></div>
+    <div class="footer">
+        © 2025 موقع توصيات الأفلام | <a href="#">سياسة الخصوصية</a> | <a href="#">شروط الاستخدام</a>
+    </div>
 
     <script>
         function recommendMovie() {
