@@ -141,77 +141,7 @@
     <div class="container">
         <section>
             <h2>أفلام مميزة</h2>
-            <div class="movie-list">
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 1">
-                    <div class="movie-info">
-                        <h3>فيلم 1</h3>
-                        <p>أكشن ومغامرة</p>
-                    </div>
-                </div>
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 2">
-                    <div class="movie-info">
-                        <h3>فيلم 2</h3>
-                        <p>دراما ورومانسية</p>
-                    </div>
-                </div>
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 3">
-                    <div class="movie-info">
-                        <h3>فيلم 3</h3>
-                        <p>كوميديا</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>قائمة الأفلام</h2>
-            <div class="movie-list">
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 4">
-                    <div class="movie-info">
-                        <h3>فيلم 4</h3>
-                        <p>خيال علمي</p>
-                    </div>
-                </div>
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 5">
-                    <div class="movie-info">
-                        <h3>فيلم 5</h3>
-                        <p>إثارة</p>
-                    </div>
-                </div>
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 6">
-                    <div class="movie-info">
-                        <h3>فيلم 6</h3>
-                        <p>مغامرة</p>
-                    </div>
-                </div>
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 7">
-                    <div class="movie-info">
-                        <h3>فيلم 7</h3>
-                        <p>دراما</p>
-                    </div>
-                </div>
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 8">
-                    <div class="movie-info">
-                        <h3>فيلم 8</h3>
-                        <p>كوميديا</p>
-                    </div>
-                </div>
-                <div class="movie">
-                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 9">
-                    <div class="movie-info">
-                        <h3>فيلم 9</h3>
-                        <p>حركة</p>
-                    </div>
-                </div>
-            </div>
+            <div class="movie-list" id="movie-list"></div>
         </section>
 
         <section class="form-container">
@@ -226,5 +156,38 @@
     <footer>
         <p>&copy; 2025 موقع توصيات أفلام. جميع الحقوق محفوظة.</p>
     </footer>
+
+    <script>
+        // مفتاح API الخاص بك من TMDb
+        const API_KEY = 'YOUR_API_KEY';  // استبدل هذا بمفتاح API الخاص بك
+        const BASE_URL = 'https://api.themoviedb.org/3';
+        const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+
+        // دالة لتحميل الأفلام من API
+        async function fetchMovies() {
+            const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=ar&page=1`);
+            const data = await response.json();
+
+            const movieList = document.getElementById('movie-list');
+            movieList.innerHTML = '';
+
+            // عرض الأفلام في الصفحة
+            data.results.forEach(movie => {
+                const movieElement = document.createElement('div');
+                movieElement.classList.add('movie');
+                movieElement.innerHTML = `
+                    <img src="${IMAGE_BASE_URL}${movie.poster_path}" alt="${movie.title}">
+                    <div class="movie-info">
+                        <h3>${movie.title}</h3>
+                        <p>${movie.release_date ? movie.release_date.split('-')[0] : 'غير متوفر'} - ${movie.genre_ids ? movie.genre_ids.join(', ') : 'غير متوفر'}</p>
+                    </div>
+                `;
+                movieList.appendChild(movieElement);
+            });
+        }
+
+        // تحميل الأفلام عند تحميل الصفحة
+        window.onload = fetchMovies;
+    </script>
 </body>
 </html>
