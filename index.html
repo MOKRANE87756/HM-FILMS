@@ -6,113 +6,130 @@
     <title>موقع توصيات أفلام</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #e9ecef;
             color: #333;
             margin: 0;
             padding: 0;
+            direction: rtl;
         }
 
         header {
-            background-color: #333;
+            background-color: #2c3e50;
             color: #fff;
             padding: 20px;
             text-align: center;
+            border-bottom: 5px solid #ecf0f1;
         }
 
         h1 {
             margin: 0;
+            font-size: 2.5em;
         }
 
         .container {
-            width: 80%;
-            margin: 20px auto;
+            width: 85%;
+            margin: 40px auto;
+        }
+
+        .movie-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around;
         }
 
         .movie {
-            display: inline-block;
-            width: 200px;
-            margin: 10px;
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 30%;
         }
 
         .movie img {
             width: 100%;
-            border-radius: 8px;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .movie-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .movie-info h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .movie-info p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .movie:hover img {
+            transform: scale(1.1);
         }
 
         footer {
-            background-color: #333;
+            background-color: #2c3e50;
             color: #fff;
             text-align: center;
-            padding: 10px;
+            padding: 20px;
             position: fixed;
             bottom: 0;
             width: 100%;
-        }
-
-        .section {
-            margin-top: 40px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table th, table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
+            border-top: 5px solid #ecf0f1;
         }
 
         .form-container {
-            margin-top: 20px;
+            margin-top: 40px;
+            text-align: center;
         }
 
         .form-container input, .form-container button {
-            padding: 10px;
+            padding: 12px;
             margin: 10px;
-            width: 100%;
             font-size: 16px;
-        }
-
-        .form-container input[type="text"], .form-container input[type="email"] {
-            width: 48%;
+            width: 45%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
 
         .form-container button {
-            width: 100%;
-            background-color: #333;
+            background-color: #2c3e50;
             color: white;
             border: none;
             cursor: pointer;
         }
 
         .form-container button:hover {
-            background-color: #555;
+            background-color: #34495e;
         }
 
-        .movie-list {
-            display: flex;
-            flex-wrap: wrap;
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            .movie {
+                width: 48%;
+            }
         }
 
-        .movie-list .movie {
-            flex: 1 1 calc(33.333% - 20px);
-            box-sizing: border-box;
-        }
+        @media (max-width: 480px) {
+            .movie {
+                width: 100%;
+            }
 
-        .movie-list .movie img {
-            width: 100%;
-            height: auto;
+            .form-container input, .form-container button {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -120,84 +137,94 @@
     <header>
         <h1>موقع توصيات أفلام</h1>
     </header>
+
     <div class="container">
-        <section class="section">
+        <section>
             <h2>أفلام مميزة</h2>
             <div class="movie-list">
                 <div class="movie">
                     <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 1">
-                    <h3>فيلم 1</h3>
-                    <p>وصف الفيلم 1</p>
+                    <div class="movie-info">
+                        <h3>فيلم 1</h3>
+                        <p>أكشن ومغامرة</p>
+                    </div>
                 </div>
                 <div class="movie">
                     <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 2">
-                    <h3>فيلم 2</h3>
-                    <p>وصف الفيلم 2</p>
+                    <div class="movie-info">
+                        <h3>فيلم 2</h3>
+                        <p>دراما ورومانسية</p>
+                    </div>
                 </div>
                 <div class="movie">
                     <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 3">
-                    <h3>فيلم 3</h3>
-                    <p>وصف الفيلم 3</p>
+                    <div class="movie-info">
+                        <h3>فيلم 3</h3>
+                        <p>كوميديا</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section>
             <h2>قائمة الأفلام</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>اسم الفيلم</th>
-                            <th>التصنيف</th>
-                            <th>السنة</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>فيلم 1</td>
-                            <td>أكشن</td>
-                            <td>2025</td>
-                        </tr>
-                        <tr>
-                            <td>فيلم 2</td>
-                            <td>دراما</td>
-                            <td>2024</td>
-                        </tr>
-                        <tr>
-                            <td>فيلم 3</td>
-                            <td>كوميديا</td>
-                            <td>2023</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="movie-list">
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 4">
+                    <div class="movie-info">
+                        <h3>فيلم 4</h3>
+                        <p>خيال علمي</p>
+                    </div>
+                </div>
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 5">
+                    <div class="movie-info">
+                        <h3>فيلم 5</h3>
+                        <p>إثارة</p>
+                    </div>
+                </div>
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 6">
+                    <div class="movie-info">
+                        <h3>فيلم 6</h3>
+                        <p>مغامرة</p>
+                    </div>
+                </div>
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 7">
+                    <div class="movie-info">
+                        <h3>فيلم 7</h3>
+                        <p>دراما</p>
+                    </div>
+                </div>
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 8">
+                    <div class="movie-info">
+                        <h3>فيلم 8</h3>
+                        <p>كوميديا</p>
+                    </div>
+                </div>
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/abOd9gHlzxt1H5R1xuZz05r2qGQ.jpg" alt="فيلم 9">
+                    <div class="movie-info">
+                        <h3>فيلم 9</h3>
+                        <p>حركة</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="section">
-            <h2>نموذج التسجيل</h2>
-            <div class="form-container">
-                <form>
-                    <input type="text" placeholder="اسمك" required>
-                    <input type="email" placeholder="بريدك الإلكتروني" required>
-                    <button type="submit">تسجيل</button>
-                </form>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>معلومات إضافية</h2>
-            <p>هذا الموقع يتيح لك إمكانية تصفح أفلام مختلفة بناءً على التصنيفات وتوصيات المستخدمين. يمكنك إضافة أفلامك المفضلة وتوصياتك من خلال النموذج أعلاه.</p>
+        <section class="form-container">
+            <h2>اشترك للحصول على أحدث التوصيات</h2>
+            <form action="#">
+                <input type="email" placeholder="بريدك الإلكتروني" required>
+                <button type="submit">اشترك</button>
+            </form>
         </section>
     </div>
 
     <footer>
         <p>&copy; 2025 موقع توصيات أفلام. جميع الحقوق محفوظة.</p>
     </footer>
-
-    <script>
-        // يمكن إضافة بعض التفاعل هنا باستخدام JavaScript إذا لزم الأمر
-        console.log("مرحبًا بكم في موقع توصيات الأفلام!");
-    </script>
 </body>
 </html>
