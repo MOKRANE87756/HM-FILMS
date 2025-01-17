@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توصية الأفلام</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .recommendation {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #4CAF50;
+            background-color: #d4edda;
+            display: none;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>ما هو أفضل فيلم لمشاهدته اليوم؟</h1>
+    <p>اختر نوع السهرة:</p>
+    <select id="occasion">
+        <option value="family">مع العائلة</option>
+        <option value="friends">مع الأصدقاء</option>
+        <option value="romantic">سهرة رومانسية</option>
+    </select>
+    <br><br>
+    <button onclick="recommendMovie()">اعرض التوصية</button>
+    <div id="recommendation" class="recommendation"></div>
+
+    <script>
+        function recommendMovie() {
+            const occasion = document.getElementById('occasion').value;
+            let movie = '';
+
+            switch (occasion) {
+                case 'family':
+                    movie = 'Coco (2017) - فيلم عائلي رائع ومؤثر لجميع الأعمار.';
+                    break;
+                case 'friends':
+                    movie = 'Guardians of the Galaxy (2014) - فيلم مليء بالمغامرة والضحك.';
+                    break;
+                case 'romantic':
+                    movie = 'The Notebook (2004) - فيلم رومانسي جميل.';
+                    break;
+                default:
+                    movie = 'يرجى اختيار نوع السهرة للحصول على توصية.';
+            }
+
+            const recommendationDiv = document.getElementById('recommendation');
+            recommendationDiv.textContent = movie;
+            recommendationDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
