@@ -64,33 +64,33 @@
     <script>
         function recommendMovie() {
             const occasion = document.getElementById('occasion').value;
-            let movie = '';
+            let movies = '';
 
             switch (occasion) {
                 case 'family':
-                    movie = 'Coco (2017) - فيلم عائلي رائع ومؤثر لجميع الأعمار.\nPaddington 2 (2017) - مغامرة ممتعة ومناسبة للعائلة.';
+                    movies = '1. Coco (2017) - فيلم عائلي رائع.\n2. Paddington 2 (2017) - مغامرة ممتعة.\n3. Klaus (2019) - رسوم متحركة جميلة.';
                     break;
                 case 'friends':
-                    movie = 'Guardians of the Galaxy (2014) - مليء بالمغامرة والضحك.\nZombieland (2009) - كوميديا زومبي مليئة بالإثارة.';
+                    movies = '1. Guardians of the Galaxy (2014) - مليء بالمغامرة.\n2. Zombieland (2009) - كوميديا زومبي.\n3. Project X (2012) - سهرة مليئة بالفوضى.';
                     break;
                 case 'romantic':
-                    movie = 'The Notebook (2004) - فيلم رومانسي جميل.\nLa La Land (2016) - مزيج من الحب والموسيقى.';
+                    movies = '1. The Notebook (2004) - قصة حب مؤثرة.\n2. La La Land (2016) - مزيج من الموسيقى والرومانسية.\n3. To All the Boys I’ve Loved Before (2018) - رومانسية شبابية.';
                     break;
                 case 'action':
-                    movie = 'Mad Max: Fury Road (2015) - فيلم حركة مليء بالأدرينالين.\nJohn Wick (2014) - إثارة لا تتوقف.';
+                    movies = '1. Mad Max: Fury Road (2015) - حركة مستمرة.\n2. John Wick (2014) - إثارة لا تتوقف.\n3. Extraction (2020) - مهمة إنقاذ خطيرة.';
                     break;
                 case 'comedy':
-                    movie = 'Superbad (2007) - كوميديا الشباب الممتعة.\nThe Grand Budapest Hotel (2014) - كوميديا ذات طابع فني رائع.';
+                    movies = '1. Superbad (2007) - كوميديا الشباب.\n2. The Grand Budapest Hotel (2014) - فنية ورائعة.\n3. Dolemite Is My Name (2019) - أداء لا يُنسى.';
                     break;
                 case 'animation':
-                    movie = 'Spider-Man: Into the Spider-Verse (2018) - رسوم متحركة مذهلة.\nToy Story 4 (2019) - قصة جديدة من مغامرات الألعاب.';
+                    movies = '1. Spider-Man: Into the Spider-Verse (2018) - رسوم مذهلة.\n2. Toy Story 4 (2019) - مغامرة جديدة.\n3. Soul (2020) - رحلة فلسفية ممتعة.';
                     break;
                 default:
-                    movie = 'يرجى اختيار نوع السهرة للحصول على توصية.';
+                    movies = 'يرجى اختيار نوع السهرة للحصول على توصية.';
             }
 
             const recommendationDiv = document.getElementById('recommendation');
-            recommendationDiv.textContent = movie;
+            recommendationDiv.textContent = movies;
             recommendationDiv.style.display = 'block';
         }
     </script>
