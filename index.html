@@ -8,7 +8,6 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            background: linear-gradient(to right, #4e54c8, #8f94fb);
             padding: 20px;
             color: #fff;
             overflow-x: hidden;
@@ -34,7 +33,7 @@
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
-        select {
+        select, input[type="color"] {
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
@@ -44,7 +43,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: background 0.3s;
         }
-        select:hover {
+        select:hover, input[type="color"]:hover {
             background: rgba(255, 255, 255, 0.3);
         }
         button {
@@ -67,7 +66,7 @@
         }
     </style>
 </head>
-<body>
+<body id="page-body">
     <h1>ما هو أفضل فيلم لمشاهدته اليوم؟</h1>
     <p>اختر نوع السهرة:</p>
     <select id="occasion">
@@ -80,6 +79,9 @@
     </select>
     <br><br>
     <button onclick="recommendMovie()">اعرض التوصية</button>
+    <br><br>
+    <p>اختر لون الخلفية:</p>
+    <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()">
     <div id="recommendation" class="recommendation"></div>
 
     <script>
@@ -113,6 +115,11 @@
             const recommendationDiv = document.getElementById('recommendation');
             recommendationDiv.textContent = movies;
             recommendationDiv.style.display = 'block';
+        }
+
+        function changeBackgroundColor() {
+            const color = document.getElementById('bgColorPicker').value;
+            document.getElementById('page-body').style.background = color;
         }
     </script>
 </body>
