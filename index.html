@@ -115,6 +115,9 @@
     </div>
 
     <script>
+        const apiKey = 'YOUR_API_KEY';  // ضع هنا API Key الخاص بك من TMDb
+        const movieId = 550;  // Movie ID for Fight Club (يمكنك تغييره إلى ID فيلم آخر)
+
         function recommendMovie() {
             const occasion = document.getElementById('occasion').value;
             let movies = '';
@@ -156,8 +159,6 @@
         }
 
         async function fetchMovieImages() {
-            const movieId = 550;  // Movie ID for Fight Club, change it to any other movie ID
-            const apiKey = 'ACCESS_TOKEN'; // Replace with your actual TMDb API token
             const url = `https://api.themoviedb.org/3/movie/${movieId}/images?language=en-US&include_image_language=en,null`;
 
             try {
