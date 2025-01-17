@@ -34,6 +34,18 @@
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
+        .movie-images {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .movie-images img {
+            margin: 10px;
+            width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
         select, input[type="color"] {
             padding: 10px;
             font-size: 16px;
@@ -97,6 +109,7 @@
     <p>اختر لون الخلفية:</p>
     <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()">
     <div id="recommendation" class="recommendation"></div>
+    <div id="movieImages" class="movie-images"></div>
     <div class="footer">
         © 2025 موقع توصيات الأفلام | <a href="#">سياسة الخصوصية</a> | <a href="#">شروط الاستخدام</a>
     </div>
@@ -132,11 +145,48 @@
             const recommendationDiv = document.getElementById('recommendation');
             recommendationDiv.textContent = movies;
             recommendationDiv.style.display = 'block';
+
+            // Call the function to fetch movie images from TMDb
+            fetchMovieImages();
         }
 
         function changeBackgroundColor() {
             const color = document.getElementById('bgColorPicker').value;
             document.getElementById('page-body').style.background = color;
+        }
+
+        async function fetchMovieImages() {
+            const movieId = 550;  // Movie ID for Fight Club, change it to any other movie ID
+            const apiKey = 'ACCESS_TOKEN'; // Replace with your actual TMDb API token
+            const url = `https://api.themoviedb.org/3/movie/${movieId}/images?language=en-US&include_image_language=en,null`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+                const images = data.posters;  // Assuming we're using posters here
+
+                const imagesContainer = document.getElementById('movieImages');
+                imagesContainer.innerHTML = '';  // Clear any previous images
+
+                if (images.length > 0) {
+                    images.forEach(image => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = `https://image.tmdb.org/t/p/w500${image.file_path}`;
+                        imagesContainer.appendChild(imgElement);
+                    });
+                } else {
+                    imagesContainer.innerHTML = 'لا توجد صور لهذا الفيلم.';
+                }
+            } catch (error) {
+                console.error('Error fetching movie images:', error);
+            }
         }
     </script>
 </body>
