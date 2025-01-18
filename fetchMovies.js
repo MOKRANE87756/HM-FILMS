@@ -1,17 +1,26 @@
-// fetchMovies.js
-// جلب الأفلام بناءً على الفئة المختارة
-async function fetchMoviesByCategory(category) {
-    const apiKey = 'curl --request GET \
-     --url 'https://api.themoviedb.org/3/movie/550?append_to_response=images&language=en-US&include_image_language=en,null' \
-     --header 'Authorization: Bearer ACCESS_TOKEN' \
-     --header 'accept: application/json'';  // API key الخاص بـ TMDb
-    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${category}&language=en-US`;
+const url = 'https://auto-download-all-in-one.p.rapidapi.com/v1/social/autolink';
+const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'x-rapidapi-host': 'auto-download-all-in-one.p.rapidapi.com',
+        'x-rapidapi-key': 'e1e7f14de7msh88c1559523c65d6p1e1c60jsn0737ab2bc842' // استبدلها إذا لزم الأمر
+    },
+    body: JSON.stringify({
+        url: 'https://www.tiktok.com/@yeuphimzz/video/7237370304337628442'
+    })
+};
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data.results;  // إرجاع الأفلام المستخلصة من الـ API
-    } catch (error) {
-        console.error('Error fetching movies:', error);
-    }
-}
+fetch(url, options)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); // البيانات التي تم الحصول عليها من API
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
